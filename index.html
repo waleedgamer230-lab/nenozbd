@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>صفحة رنيم</title>
+    <title>عيدميلاد النينوز</title>
     
     <!-- الخطوط العربية -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     
     <!-- مكتبة التأثيرات -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
@@ -18,7 +18,6 @@
             --primary-red: #ff2a5f;
             --dark-burgundy: #1a0006;
             --rose-gold: #ffb8c6;
-            --paper-bg: #fff8f0;
         }
 
         * {
@@ -131,9 +130,10 @@
             display: block;
         }
 
-        /* --- الورقة الرومانسية الإبداعية المحسنة --- */
+        /* --- الورقة الرومانسية المودرن التفاعلية --- */
         .letter-section {
             margin-bottom: 40px;
+            text-align: center;
         }
 
         .section-title {
@@ -143,26 +143,55 @@
             margin-bottom: 30px;
         }
 
-        .paper-letter {
-            background: var(--paper-bg);
-            color: #2c2c2c;
-            padding: 45px 40px;
-            border-radius: 15px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6),
-                        inset 0 0 100px rgba(210, 180, 140, 0.3);
+        .letter-trigger-box {
+            background: linear-gradient(135deg, rgba(255, 42, 95, 0.25), rgba(255, 184, 198, 0.1));
+            border: 1px solid rgba(255, 184, 198, 0.4);
+            padding: 22px;
+            border-radius: 20px;
+            color: var(--rose-gold);
+            font-size: 1.3rem;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            transition: transform 0.3s, background 0.3s;
+            max-width: 500px;
+            margin: 0 auto;
+            font-weight: bold;
+        }
+
+        .letter-trigger-box:hover {
+            transform: scale(1.03);
+            background: linear-gradient(135deg, rgba(255, 42, 95, 0.35), rgba(255, 184, 198, 0.2));
+        }
+
+        .modern-letter-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 184, 198, 0.3);
+            color: #fff;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(15px);
             position: relative;
-            font-family: 'Aref Ruqaa', serif;
-            line-height: 2.3;
-            font-size: 1.35rem;
-            border-left: 6px solid #d4a373;
-            border-right: 2px solid #e6ccb2;
+            line-height: 2.2;
+            font-size: 1.15rem;
+            margin-top: 25px;
+            text-align: right;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+        }
+
+        .modern-letter-card.show {
+            display: block;
+            opacity: 1;
         }
 
         .letter-header {
-            font-size: 1.9rem;
-            color: #8b0000;
-            margin-bottom: 25px;
-            font-weight: bold;
+            font-size: 1.6rem;
+            color: var(--rose-gold);
+            margin-bottom: 20px;
+            font-weight: 700;
         }
 
         /* --- السهم والتفاعل الإضافي --- */
@@ -194,7 +223,6 @@
             margin-top: 20px;
             font-size: 2rem;
             color: var(--rose-gold);
-            font-family: 'Aref Ruqaa', serif;
             opacity: 0;
             transition: opacity 0.8s ease;
             display: none;
@@ -209,7 +237,7 @@
             .timer-grid { grid-template-columns: repeat(2, 1fr); }
             .time-value { font-size: 1.8rem; }
             .header-title h1 { font-size: 2.2rem; }
-            .paper-letter { padding: 30px 20px; font-size: 1.15rem; }
+            .modern-letter-card { padding: 25px; font-size: 1rem; }
         }
     </style>
 </head>
@@ -224,7 +252,7 @@
             <h1>للنينو حبيب الويدو</h1>
         </div>
 
-        <!-- تذكير عيد الميلاد الجديد -->
+        <!-- تذكير عيد الميلاد -->
         <div class="bday-banner">
             عيد ميلاد النينو الشقي
         </div>
@@ -252,19 +280,22 @@
             </div>
         </div>
 
-        <!-- الورقة الرومانسية -->
+        <!-- الورقة الرومانسية التفاعلية المودرن -->
         <div class="letter-section">
             <h2 class="section-title">رومانسية وكدا</h2>
-            <div class="paper-letter">
-                <div class="letter-header">نينو حبيبه</div>
+            <div class="letter-trigger-box" onclick="revealLetter()">
+                اضغط هنا لقراءة رسالة النينو 💌
+            </div>
+            <div class="modern-letter-card" id="modernLetter">
+                <div class="letter-header">نينو حبيبتي</div>
                 <p>
                     كل سنه وانت طيبه وعارف ان الايام دي ممكن مكنش احسن حاجه بينا بس واثق انك هتظبطي الدنيا وانا معاكي يعني متخافيش مش بياع 
                     كل سنه وانت طيبه يا رنيم ممكن نعرف بعض من زمان اوي ومكناش نتخيل اننا نبقى في الوضع دا وقعدتنا مع بعض والاجواء لما نتقابل كنا مستحيل نتخيلها 
-                    ويلا بقا معاكي الأسد يامحظوظه 😂 ربنا يخليكي لينا بقا ويارب تكون الهديه عجبتك وأكيد عجبتك عشان مني بس يعني برضو والسلسلة هذي أقيم هديه جبتها في حياتي لحد عموما فربنا يهديكي البسيها أطنش
+                    ويلا بقا معاكي الأسد يامحظوظه 😂 ربنا يخليكي لينا بقا ويارب تكون الهديه عجبتك وأكيد عجبتك عشان مني بس يعني برضو والسلسلة هذي أقيم هديه جبتها في حياتي لحد عموما فربنا يهديكي البسيها اطنط
                     <br><br>
-                    نينو يعني الحب نينو يعني الجمال نينو يعني الرقي متخافيش في اي وقت لو حسيتي انك متضايقه اعرفي أن أنا أبوكي وحبيبك وجوزك وصاحبك وكل حاجه يعني مش هسيبك في يوم مكسوره 
+                    نينو يعني الحب نينو يعني الجمال نينو يعني الرقي متخافيش في اي وقت لو حسيتي انك متدايقه اعرفي أن أنا أبوكي وحبيبك وجوزك وصاحبك وكل حاجه يعني مش هسيبك في يوم مكسوره 
                     ربنا يخليكي ليا يا هبله ويا حظك معاكي وليد برضو بس يلا هتفضلي أصغر مني برضو يا 2010 وانا 2009 
-                    معايا يا رنيم هخليكي تعشقي الحياه انت بس نمشي بالمتفقين عليه كنت عايز الكلام دا يبقى معاكي لحد ماتوريه لعيالنا بس هنشوف هنشوف خير الكلام ما قل ودل بقا بحبك وكل سنه وانت معايا يا حبيبه
+                    معايا يا رنيم هخليكي تعشقي الحياه انت بس نمشي بالمتفقين عليه كنت عايز الكلام دا يبقى معاكي لحد ماتوريه لعيالنا بس هنشوف هنشوف خير الكلام ما قل ودل بقا بحبك وكل سنه وانت معايا يا حبيبتي
                 </p>
             </div>
         </div>
@@ -282,6 +313,18 @@
     </div>
 
     <script>
+        function revealLetter() {
+            var letterCard = document.getElementById("modernLetter");
+            letterCard.classList.add("show");
+            if (typeof confetti === "function") {
+                confetti({
+                    particleCount: 70,
+                    spread: 80,
+                    origin: { y: 0.7 }
+                });
+            }
+        }
+
         function revealLove() {
             var loveMsg = document.getElementById("hiddenLove");
             loveMsg.classList.add("show");
@@ -310,53 +353,4 @@
                 document.getElementById("days").innerText = days;
                 document.getElementById("hours").innerText = hours;
                 document.getElementById("minutes").innerText = minutes;
-                document.getElementById("seconds").innerText = seconds;
-            }
-        }
-        setInterval(updateCounter, 1000);
-        updateCounter();
-
-        // خلفية القلوب المتحركة
-        const canvas = document.getElementById("bg-canvas");
-        const ctx = canvas.getContext("2d");
-        let width = canvas.width = window.innerWidth;
-        let height = canvas.height = window.innerHeight;
-
-        window.addEventListener("resize", () => {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
-        });
-
-        class HeartParticle {
-            constructor() { this.reset(); }
-            reset() {
-                this.x = Math.random() * width;
-                this.y = height + Math.random() * 50;
-                this.size = Math.random() * 15 + 8;
-                this.speed = Math.random() * 1.2 + 0.5;
-                this.opacity = Math.random() * 0.4 + 0.1;
-            }
-            update() {
-                this.y -= this.speed;
-                if (this.y < -20) this.reset();
-            }
-            draw() {
-                ctx.save();
-                ctx.globalAlpha = this.opacity;
-                ctx.fillStyle = "#ff2a5f";
-                ctx.font = `${this.size}px serif`;
-                ctx.fillText("♥", this.x, this.y);
-                ctx.restore();
-            }
-        }
-
-        const particles = Array.from({ length: 25 }, () => new HeartParticle());
-        function animate() {
-            ctx.clearRect(0, 0, width, height);
-            particles.forEach(p => { p.update(); p.draw(); });
-            requestAnimationFrame(animate);
-        }
-        animate();
-    </script>
-</body>
-</html>
+                document.getElementById("seconds").
