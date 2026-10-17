@@ -8,7 +8,7 @@
     <!-- الخطوط العربية -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     
     <!-- مكتبة التأثيرات -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
@@ -18,6 +18,7 @@
             --primary-red: #ff2a5f;
             --dark-burgundy: #1a0006;
             --rose-gold: #ffb8c6;
+            --paper-bg: #fff8f0;
         }
 
         * {
@@ -57,7 +58,7 @@
 
         .header-title {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
         }
 
         .header-title h1 {
@@ -78,6 +79,33 @@
             font-size: 1.1rem;
             margin-bottom: 30px;
             backdrop-filter: blur(5px);
+        }
+
+        /* --- مشغل الأغنية الأنيق --- */
+        .music-player-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 184, 198, 0.25);
+            padding: 20px;
+            border-radius: 20px;
+            backdrop-filter: blur(12px);
+            max-width: 450px;
+            margin: 0 auto 40px auto;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .music-player-card h4 {
+            color: var(--rose-gold);
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        audio {
+            width: 100%;
+            height: 40px;
+            outline: none;
+            filter: drop-shadow(0 2px 5px rgba(0,0,0,0.3));
         }
 
         /* --- العداد الزمني الفاخر --- */
@@ -130,7 +158,7 @@
             display: block;
         }
 
-        /* --- الورقة الرومانسية المودرن التفاعلية --- */
+        /* --- قسم الرسالة التفاعلية (نينو حبيبتي) --- */
         .letter-section {
             margin-bottom: 40px;
             text-align: center;
@@ -140,28 +168,24 @@
             text-align: center;
             font-size: 1.8rem;
             color: var(--rose-gold);
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
 
-        .letter-trigger-box {
-            background: linear-gradient(135deg, rgba(255, 42, 95, 0.25), rgba(255, 184, 198, 0.1));
-            border: 1px solid rgba(255, 184, 198, 0.4);
-            padding: 22px;
-            border-radius: 20px;
+        /* عبارة "نينو حبيبتي" القابلة للضغط */
+        .letter-trigger-header {
+            font-size: 2.2rem;
             color: var(--rose-gold);
-            font-size: 1.3rem;
             cursor: pointer;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-            transition: transform 0.3s, background 0.3s;
-            max-width: 500px;
-            margin: 0 auto;
-            font-weight: bold;
+            font-family: 'Aref Ruqaa', serif;
+            text-shadow: 0 0 15px rgba(255, 184, 198, 0.4);
+            display: inline-block;
+            transition: transform 0.3s, color 0.3s;
+            margin-bottom: 20px;
         }
 
-        .letter-trigger-box:hover {
-            transform: scale(1.03);
-            background: linear-gradient(135deg, rgba(255, 42, 95, 0.35), rgba(255, 184, 198, 0.2));
+        .letter-trigger-header:hover {
+            transform: scale(1.08);
+            color: #fff;
         }
 
         .modern-letter-card {
@@ -175,7 +199,7 @@
             position: relative;
             line-height: 2.2;
             font-size: 1.15rem;
-            margin-top: 25px;
+            margin-top: 15px;
             text-align: right;
             display: none;
             opacity: 0;
@@ -185,13 +209,6 @@
         .modern-letter-card.show {
             display: block;
             opacity: 1;
-        }
-
-        .letter-header {
-            font-size: 1.6rem;
-            color: var(--rose-gold);
-            margin-bottom: 20px;
-            font-weight: 700;
         }
 
         /* --- السهم والتفاعل الإضافي --- */
@@ -237,6 +254,7 @@
             .timer-grid { grid-template-columns: repeat(2, 1fr); }
             .time-value { font-size: 1.8rem; }
             .header-title h1 { font-size: 2.2rem; }
+            .letter-trigger-header { font-size: 1.8rem; }
             .modern-letter-card { padding: 25px; font-size: 1rem; }
         }
     </style>
@@ -255,6 +273,16 @@
         <!-- تذكير عيد الميلاد -->
         <div class="bday-banner">
             عيد ميلاد النينو الشقي
+        </div>
+
+        <!-- مشغل الأغنية الأنيق -->
+        <div class="music-player-card">
+            <h4>اغنيتنا المفضلة 🎵</h4>
+            <!-- استبدل song.mp3 برابط الأغنية المباشر أو اسم ملف الصوت الخاص بك -->
+            <audio controls>
+                <source src="song.mp3" type="audio/mpeg">
+                متصفحك لا يدعم تشغيل الصوت
+            </audio>
         </div>
 
         <!-- العداد الزمني -->
@@ -280,14 +308,16 @@
             </div>
         </div>
 
-        <!-- الورقة الرومانسية التفاعلية المودرن -->
+        <!-- الورقة الرومانسية التفاعلية -->
         <div class="letter-section">
             <h2 class="section-title">رومانسية وكدا</h2>
-            <div class="letter-trigger-box" onclick="revealLetter()">
-                اضغط هنا لقراءة رسالة النينو 💌
+            
+            <!-- جملة نينو حبيبتي قابلة للضغط -->
+            <div class="letter-trigger-header" onclick="revealLetter()">
+                نينو حبيبتي 💌 (اضحي هنا)
             </div>
+
             <div class="modern-letter-card" id="modernLetter">
-                <div class="letter-header">نينو حبيبتي</div>
                 <p>
                     كل سنه وانت طيبه وعارف ان الايام دي ممكن مكنش احسن حاجه بينا بس واثق انك هتظبطي الدنيا وانا معاكي يعني متخافيش مش بياع 
                     كل سنه وانت طيبه يا رنيم ممكن نعرف بعض من زمان اوي ومكناش نتخيل اننا نبقى في الوضع دا وقعدتنا مع بعض والاجواء لما نتقابل كنا مستحيل نتخيلها 
@@ -353,4 +383,53 @@
                 document.getElementById("days").innerText = days;
                 document.getElementById("hours").innerText = hours;
                 document.getElementById("minutes").innerText = minutes;
-                document.getElementById("seconds").
+                document.getElementById("seconds").innerText = seconds;
+            }
+        }
+        setInterval(updateCounter, 1000);
+        updateCounter();
+
+        // خلفية القلوب المتحركة
+        const canvas = document.getElementById("bg-canvas");
+        const ctx = canvas.getContext("2d");
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+
+        window.addEventListener("resize", () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        });
+
+        class HeartParticle {
+            constructor() { this.reset(); }
+            reset() {
+                this.x = Math.random() * width;
+                this.y = height + Math.random() * 50;
+                this.size = Math.random() * 15 + 8;
+                this.speed = Math.random() * 1.2 + 0.5;
+                this.opacity = Math.random() * 0.4 + 0.1;
+            }
+            update() {
+                this.y -= this.speed;
+                this.y < -20 && this.reset();
+            }
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.opacity;
+                ctx.fillStyle = "#ff2a5f";
+                ctx.font = `${this.size}px serif`;
+                ctx.fillText("♥", this.x, this.y);
+                ctx.restore();
+            }
+        }
+
+        const particles = Array.from({ length: 25 }, () => new HeartParticle());
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            particles.forEach(p => { p.update(); p.draw(); });
+            requestAnimationFrame(animate);
+        }
+        animate();
+    </script>
+</body>
+</html>
