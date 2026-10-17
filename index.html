@@ -1,520 +1,313 @@
-!DOCTYPE html
-html lang=ar dir=rtl
-head
-    meta charset=UTF-8
-    meta name=viewport content=width=device-width, initial-scale=1.0
-    titleصفحة رنيمtitle
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صفحة رنيم</title>
     
-    !-- الخطوط العربية --
-    link rel=preconnect href=httpsfonts.googleapis.com
-    link rel=preconnect href=httpsfonts.gstatic.com crossorigin
-    link href=httpsfonts.googleapis.comcss2family=Aref+Ruqaawght@400;700&family=Cairowght@300;400;600;700;900&display=swap rel=stylesheet
+    <!-- الخطوط العربية -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     
-    !-- مكتبة التأثيرات --
-    script src=httpscdn.jsdelivr.netnpmcanvas-confetti@1.6.0distconfetti.browser.min.jsscript
+    <!-- مكتبة التأثيرات -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
-    style
-        root {
-            --primary-red #ff2a5f;
-            --dark-burgundy #1a0006;
-            --rose-gold #ffb8c6;
-            --paper-bg #fff8f0;
+    <style>
+        :root {
+            --primary-red: #ff2a5f;
+            --dark-burgundy: #1a0006;
+            --rose-gold: #ffb8c6;
+            --paper-bg: #fff8f0;
         }
 
-         {
-            margin 0;
-            padding 0;
-            box-sizing border-box;
-            user-select none;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
         }
 
         body {
-            font-family 'Cairo', sans-serif;
-            background radial-gradient(circle at center, #3d000d, #0f0003);
-            color #fff;
-            min-height 100vh;
-            overflow-x hidden;
-            position relative;
+            font-family: 'Cairo', sans-serif;
+            background: radial-gradient(circle at center, #3d000d, #0f0003);
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
         }
 
         #bg-canvas {
-            position fixed;
-            top 0;
-            left 0;
-            width 100%;
-            height 100%;
-            z-index 1;
-            pointer-events none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
         }
 
-         --- شاشة الباسورد --- 
+        /* --- شاشة الباسورد --- */
         #login-screen {
-            position fixed;
-            top 0;
-            left 0;
-            width 100%;
-            height 100%;
-            background rgba(15, 0, 3, 0.95);
-            backdrop-filter blur(15px);
-            z-index 1000;
-            display flex;
-            justify-content center;
-            align-items center;
-            transition opacity 0.8s ease, visibility 0.8s;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 0, 3, 0.95);
+            backdrop-filter: blur(15px);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.8s ease, visibility 0.8s;
         }
 
         .login-card {
-            background rgba(255, 255, 255, 0.05);
-            border 1px solid rgba(255, 42, 95, 0.3);
-            padding 40px 30px;
-            border-radius 25px;
-            text-align center;
-            box-shadow 0 0 30px rgba(255, 42, 95, 0.2);
-            max-width 400px;
-            width 90%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 42, 95, 0.3);
+            padding: 40px 30px;
+            border-radius: 25px;
+            text-align: center;
+            box-shadow: 0 0 30px rgba(255, 42, 95, 0.2);
+            max-width: 400px;
+            width: 90%;
         }
 
         .login-card h2 {
-            color var(--rose-gold);
-            margin-bottom 20px;
-            font-size 1.5rem;
+            color: var(--rose-gold);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
         }
 
         .login-card input {
-            width 100%;
-            padding 12px 20px;
-            border-radius 30px;
-            border 1px solid rgba(255, 255, 255, 0.2);
-            background rgba(0, 0, 0, 0.4);
-            color #fff;
-            font-size 1.1rem;
-            text-align center;
-            outline none;
-            margin-bottom 20px;
-            letter-spacing 3px;
+            width: 100%;
+            padding: 12px 20px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(0, 0, 0, 0.4);
+            color: #fff;
+            font-size: 1.1rem;
+            text-align: center;
+            outline: none;
+            margin-bottom: 20px;
+            letter-spacing: 3px;
         }
 
         .login-card button {
-            background linear-gradient(135deg, #ff2a5f, #b30032);
-            border none;
-            color #fff;
-            padding 12px 35px;
-            border-radius 30px;
-            font-size 1rem;
-            font-weight 700;
-            cursor pointer;
-            box-shadow 0 5px 15px rgba(255, 42, 95, 0.4);
-            transition transform 0.2s;
+            background: linear-gradient(135deg, #ff2a5f, #b30032);
+            border: none;
+            color: #fff;
+            padding: 12px 35px;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255, 42, 95, 0.4);
+            transition: transform 0.2s;
         }
 
-        .login-card buttonhover {
-            transform scale(1.05);
+        .login-card button:hover {
+            transform: scale(1.05);
         }
 
         .error-msg {
-            color #ff4757;
-            font-size 0.9rem;
-            margin-top 10px;
-            display none;
+            color: #ff4757;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            display: none;
         }
 
-         --- المحتوى الرئيسي --- 
+        /* --- المحتوى الرئيسي --- */
         .main-container {
-            position relative;
-            z-index 2;
-            max-width 900px;
-            margin 0 auto;
-            padding 40px 20px;
-            display none;
-            opacity 0;
-            transition opacity 1s ease;
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            display: none;
+            opacity: 0;
+            transition: opacity 1s ease;
         }
 
         .header-title {
-            text-align center;
-            margin-bottom 40px;
+            text-align: center;
+            margin-bottom: 40px;
         }
 
         .header-title h1 {
-            font-size 2.8rem;
-            color var(--rose-gold);
-            text-shadow 0 0 15px rgba(255, 184, 198, 0.4);
-            margin-bottom 10px;
+            font-size: 2.8rem;
+            color: var(--rose-gold);
+            text-shadow: 0 0 15px rgba(255, 184, 198, 0.4);
+            margin-bottom: 10px;
         }
 
-         تنبيه عيد الميلاد في الأعلى 
+        /* تنبيه عيد الميلاد في الأعلى */
         .bday-banner {
-            background rgba(255, 42, 95, 0.15);
-            border 1px solid rgba(255, 42, 95, 0.4);
-            padding 12px 20px;
-            border-radius 15px;
-            text-align center;
-            color var(--rose-gold);
-            font-size 1.1rem;
-            margin-bottom 30px;
-            backdrop-filter blur(5px);
+            background: rgba(255, 42, 95, 0.15);
+            border: 1px solid rgba(255, 42, 95, 0.4);
+            padding: 12px 20px;
+            border-radius: 15px;
+            text-align: center;
+            color: var(--rose-gold);
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            backdrop-filter: blur(5px);
         }
 
-         --- العداد الزمني الفاخر --- 
+        /* --- العداد الزمني الفاخر --- */
         .counter-section {
-            background rgba(255, 255, 255, 0.03);
-            border 1px solid rgba(255, 255, 255, 0.1);
-            border-radius 30px;
-            padding 30px 20px;
-            backdrop-filter blur(10px);
-            box-shadow 0 15px 35px rgba(0, 0, 0, 0.5);
-            margin-bottom 50px;
-            text-align center;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            padding: 30px 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            margin-bottom: 50px;
+            text-align: center;
         }
 
         .counter-section h3 {
-            color var(--rose-gold);
-            margin-bottom 25px;
-            font-size 1.2rem;
-            letter-spacing 1px;
+            color: var(--rose-gold);
+            margin-bottom: 25px;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
         }
 
         .timer-grid {
-            display grid;
-            grid-template-columns repeat(4, 1fr);
-            gap 15px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
         }
 
         .time-card {
-            background linear-gradient(145deg, rgba(255, 42, 95, 0.15), rgba(0, 0, 0, 0.4));
-            border 1px solid rgba(255, 42, 95, 0.3);
-            border-radius 20px;
-            padding 20px 10px;
-            position relative;
-            overflow hidden;
-            box-shadow inset 0 0 15px rgba(255, 42, 95, 0.1);
+            background: linear-gradient(145deg, rgba(255, 42, 95, 0.15), rgba(0, 0, 0, 0.4));
+            border: 1px solid rgba(255, 42, 95, 0.3);
+            border-radius: 20px;
+            padding: 20px 10px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 0 15px rgba(255, 42, 95, 0.1);
         }
 
         .time-value {
-            font-size 2.5rem;
-            font-weight 900;
-            color #fff;
-            text-shadow 0 0 10px var(--primary-red);
-            display block;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #fff;
+            text-shadow: 0 0 10px var(--primary-red);
+            display: block;
         }
 
         .time-label {
-            font-size 0.9rem;
-            color var(--rose-gold);
-            margin-top 5px;
-            display block;
+            font-size: 0.9rem;
+            color: var(--rose-gold);
+            margin-top: 5px;
+            display: block;
         }
 
-         --- الصور تحت بعض بشكل جمالي وغير تقليدي --- 
-        .gallery-section {
-            margin-bottom 60px;
-            display flex;
-            flex-direction column;
-            gap 30px;
-            align-items center;
-        }
-
-        .artistic-photo-wrapper {
-            background rgba(255, 255, 255, 0.05);
-            border 1px solid rgba(255, 184, 198, 0.3);
-            padding 15px;
-            border-radius 20px;
-            backdrop-filter blur(10px);
-            box-shadow 0 10px 30px rgba(0,0,0,0.4);
-            width 100%;
-            max-width 400px;
-            transition transform 0.3s ease;
-        }
-
-        .artistic-photo-wrapperhover {
-            transform scale(1.03);
-        }
-
-        .artistic-photo-wrapper img {
-            width 100%;
-            height 350px;
-            object-fit cover;
-            border-radius 12px;
-        }
-
-         --- الورقة الرومانسية الإبداعية --- 
+        /* --- الورقة الرومانسية الإبداعية --- */
         .letter-section {
-            margin-bottom 40px;
+            margin-bottom: 40px;
         }
 
         .section-title {
-            text-align center;
-            font-size 1.8rem;
-            color var(--rose-gold);
-            margin-bottom 30px;
+            text-align: center;
+            font-size: 1.8rem;
+            color: var(--rose-gold);
+            margin-bottom: 30px;
         }
 
         .paper-letter {
-            background var(--paper-bg);
-            color #2c2c2c;
-            padding 40px;
-            border-radius 5px;
-            box-shadow 0 10px 30px rgba(0, 0, 0, 0.6),
+            background: var(--paper-bg);
+            color: #2c2c2c;
+            padding: 40px;
+            border-radius: 5px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6),
                         inset 0 0 100px rgba(210, 180, 140, 0.3);
-            position relative;
-            font-family 'Aref Ruqaa', serif;
-            line-height 2.2;
-            font-size 1.3rem;
-            border-left 4px solid #d4a373;
+            position: relative;
+            font-family: 'Aref Ruqaa', serif;
+            line-height: 2.2;
+            font-size: 1.3rem;
+            border-left: 4px solid #d4a373;
         }
 
         .letter-header {
-            font-size 1.8rem;
-            color #8b0000;
-            margin-bottom 20px;
-            font-weight bold;
+            font-size: 1.8rem;
+            color: #8b0000;
+            margin-bottom: 20px;
+            font-weight: bold;
         }
 
-         --- السهم والتفاعل الإضافي --- 
+        /* --- السهم والتفاعل الإضافي --- */
         .extra-section {
-            text-align center;
-            margin-top 40px;
-            padding 20px;
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
         }
 
         .arrow-btn {
-            background none;
-            border none;
-            color var(--rose-gold);
-            font-size 1.2rem;
-            cursor pointer;
-            font-family 'Cairo', sans-serif;
-            display inline-flex;
-            align-items center;
-            gap 10px;
-            transition transform 0.3s;
+            background: none;
+            border: none;
+            color: var(--rose-gold);
+            font-size: 1.2rem;
+            cursor: pointer;
+            font-family: 'Cairo', sans-serif;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: transform 0.3s;
         }
 
-        .arrow-btnhover {
-            transform translateY(3px);
-            color #fff;
+        .arrow-btn:hover {
+            transform: translateY(3px);
+            color: #fff;
         }
 
         .hidden-love {
-            margin-top 20px;
-            font-size 2rem;
-            color var(--rose-gold);
-            font-family 'Aref Ruqaa', serif;
-            opacity 0;
-            transition opacity 0.8s ease;
-            display none;
+            margin-top: 20px;
+            font-size: 2rem;
+            color: var(--rose-gold);
+            font-family: 'Aref Ruqaa', serif;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+            display: none;
         }
 
         .hidden-love.show {
-            display block;
-            opacity 1;
+            display: block;
+            opacity: 1;
         }
 
-        @media (max-width 600px) {
-            .timer-grid { grid-template-columns repeat(2, 1fr); }
-            .time-value { font-size 1.8rem; }
-            .header-title h1 { font-size 2rem; }
-            .paper-letter { padding 25px; font-size 1.1rem; }
+        @media (max-width: 600px) {
+            .timer-grid { grid-template-columns: repeat(2, 1fr); }
+            .time-value { font-size: 1.8rem; }
+            .header-title h1 { font-size: 2rem; }
+            .paper-letter { padding: 25px; font-size: 1.1rem; }
         }
-    style
-head
-body
+    </style>
+</head>
+<body>
 
-    canvas id=bg-canvascanvas
+    <canvas id="bg-canvas"></canvas>
 
-    !-- 1. شاشة الباسورد --
-    div id=login-screen
-        div class=login-card
-            h2حطي الباسوردh2
-            input type=password id=passwordInput placeholder=الباسورد هنا
-            br
-            button onclick=checkPassword()ارسالbutton
-            div class=error-msg id=errorMsgكلمة السر غير صحيحة، حاولي مجدداً!div
-        div
-    div
+    <!-- 1. شاشة الباسورد -->
+    <div id="login-screen">
+        <div class="login-card">
+            <h2>حطي الباسورد</h2>
+            <input type="password" id="passwordInput" placeholder="الباسورد هنا">
+            <br>
+            <button onclick="checkPassword()">ارسال</button>
+            <div class="error-msg" id="errorMsg">كلمة السر غير صحيحة، حاولي مجدداً!</div>
+        </div>
+    </div>
 
-    !-- 2. المحتوى الرئيسي للموقع --
-    div class=main-container id=mainContent
+    <!-- 2. المحتوى الرئيسي للموقع -->
+    <div class="main-container" id="mainContent">
         
-        div class=header-title
-            h1كل سنة وأنتِ طيبة يا رنيمh1
-            p style=color var(--rose-gold);18 أبريل 2026p
-        div
+        <div class="header-title">
+            <h1>كل سنة وأنتِ طيبة يا رنيم</h1>
+            <p style="color: var(--rose-gold);">بداية حكايتنا: 18 أبريل 2026</p>
+        </div>
 
-        !-- تذكير بعيد الميلاد في كل الصفحات --
-        div class=bday-banner
-            عيد ميلاد السعادة - 18 أكتوبر 2026
-        div
-
-        !-- العداد الزمني الفاخر --
-        div class=counter-section
-            h3اليوم اللذيذ الجميلh3
-            div class=timer-grid
-                div class=time-card
-                    span class=time-value id=days0span
-                    span class=time-labelيومspan
-                div
-                div class=time-card
-                    span class=time-value id=hours0span
-                    span class=time-labelساعةspan
-                div
-                div class=time-card
-                    span class=time-value id=minutes0span
-                    span class=time-labelدقيقةspan
-                div
-                div class=time-card
-                    span class=time-value id=seconds0span
-                    span class=time-labelثانيةspan
-                div
-            div
-        div
-
-        !-- معرض الصور تحت بعض بشكل جمالي وغير تقليدي --
-        div class=gallery-section
-            h2 class=section-titleانا والنينوh2
-            div class=artistic-photo-wrapper
-                img src=pic1.jpg alt=صورة 1 onerror=this.src='httpsimages.unsplash.comphoto-1518199266791-5375a83190b7w=500'
-            div
-            div class=artistic-photo-wrapper
-                img src=pic2.jpg alt=صورة 2 onerror=this.src='httpsimages.unsplash.comphoto-1516589178581-6cd7833ae3b2w=500'
-            div
-            div class=artistic-photo-wrapper
-                img src=pic3.jpg alt=صورة 3 onerror=this.src='httpsimages.unsplash.comphoto-1522673607200-164d1b6ce486w=500'
-            div
-        div
-
-        !-- الورقة الرومانسية الإبداعية --
-        div class=letter-section
-            h2 class=section-titleرومانسية وكداh2
-            div class=paper-letter
-                div class=letter-headerنينو حبيبتي،div
-                p
-                    كل سنة وأنتِ طيبة وعارف ان الأيام دي ممكن مكنش أحسن حاجة بينا بس واثق انك هتظبطي الدنيا وأنا معاكي يعني متخافيش مش بياع. 
-                    كل سنة وأنتِ طيبة يا رنيم، ممكن نعرف بعض من زمان قوي ومكناش نتخيل أننا نبقى في الوضع دا وقعدتنا مع بعض والأجواء لما نتقابل كنا مستحيل نتخيلها. 
-                    ويلا بقا معاكي الأسد يامحظوظة. ربنا يخليكي لينا بقا. ويارب تكون الهدية عجبتك وأكيد عجبتك عشان مني بس يعني برضه، والسلسلة هذي أقيم هدية جبتها في حياتي لحد عموماً فربنا يهديكي البسيها أطنش!
-                    brbr
-                    نينو يعني الحب، نينو يعني الجمال، نينو يعني الرقي. متخافيش في أي وقت لو حسيتي انك متضايقة اعرفي أن أنا أبوكي وحبيبك وجوزك وصاحبك وكل حاجة، يعني مش هسيبك في يوم مكسورة. 
-                    ربنا يخليكي ليا يا هبله ويا حظك معاكي وليد برضه بس يلا هتفضلي أصغر مني برضه يا 2010 وأنا 2009. 
-                    معايا يا رنيم هخليكي تعشقي الحياة أنتِ بس نمشي بالمتفقين عليه. كنت عايز الكلام دا يبقى معاكي لحد ماتوريه لعيالنا بس هنشوف هنشوف. خير الكلام ما قل ودل بقا، بحبك وكل سنة وأنتِ معايا يا حبيبتي
-                p
-            div
-        div
-
-        !-- السهم والكلمة السرية --
-        div class=extra-section
-            button class=arrow-btn onclick=revealLove()
-                نسيت اقولك
-            button
-            div class=hidden-love id=hiddenLove
-                بحبك تاني
-            div
-        div
-
-    div
-
-    script
-        const CORRECT_PASSWORD = 418; 
-
-        function checkPassword() {
-            const input = document.getElementById(passwordInput).value;
-            const errorMsg = document.getElementById(errorMsg);
-            const loginScreen = document.getElementById(login-screen);
-            const mainContent = document.getElementById(mainContent);
-
-            if (input === CORRECT_PASSWORD) {
-                loginScreen.style.opacity = 0;
-                setTimeout(() = {
-                    loginScreen.style.display = none;
-                    mainContent.style.display = block;
-                    setTimeout(() = mainContent.style.opacity = 1, 50);
-                    triggerConfetti();
-                }, 800);
-            } else {
-                errorMsg.style.display = block;
-            }
-        }
-
-        function revealLove() {
-            const loveMsg = document.getElementById(hiddenLove);
-            loveMsg.classList.add(show);
-            confetti({
-                particleCount 50,
-                spread 60,
-                origin { y 0.8 }
-            });
-        }
-
-        function triggerConfetti() {
-            confetti({
-                particleCount 100,
-                spread 80,
-                origin { y 0.6 }
-            });
-        }
-
-         العداد الزمني
-        const startDate = new Date(2026-04-18T000000).getTime();
-
-        function updateCounter() {
-            const now = new Date().getTime();
-            const diff = now - startDate;
-
-            if (diff  0) {
-                const days = Math.floor(diff  (1000  60  60  24));
-                const hours = Math.floor((diff % (1000  60  60  24))  (1000  60  60));
-                const minutes = Math.floor((diff % (1000  60  60))  (1000  60));
-                const seconds = Math.floor((diff % (1000  60))  1000);
-
-                document.getElementById(days).innerText = days;
-                document.getElementById(hours).innerText = hours;
-                document.getElementById(minutes).innerText = minutes;
-                document.getElementById(seconds).innerText = seconds;
-            }
-        }
-        setInterval(updateCounter, 1000);
-        updateCounter();
-
-         خلفية القلوب المتحركة
-        const canvas = document.getElementById(bg-canvas);
-        const ctx = canvas.getContext(2d);
-        let width = canvas.width = window.innerWidth;
-        let height = canvas.height = window.innerHeight;
-
-        window.addEventListener(resize, () = {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
-        });
-
-        class HeartParticle {
-            constructor() { this.reset(); }
-            reset() {
-                this.x = Math.random()  width;
-                this.y = height + Math.random()  50;
-                this.size = Math.random()  15 + 8;
-                this.speed = Math.random()  1.2 + 0.5;
-                this.opacity = Math.random()  0.4 + 0.1;
-            }
-            update() {
-                this.y -= this.speed;
-                if (this.y  -20) this.reset();
-            }
-            draw() {
-                ctx.save();
-                ctx.globalAlpha = this.opacity;
-                ctx.fillStyle = #ff2a5f;
-                ctx.font = `${this.size}px serif`;
-                ctx.fillText(♥, this.x, this.y);
-                ctx.restore();
-            }
-        }
-
-        const particles = Array.from({ length 25 }, () = new HeartParticle());
-        function animate() {
-            ctx.clearRect(0, 0, width, height);
-            particles.forEach(p = { p.update(); p.draw(); });
-            requestAnimationFrame(animate);
-        }
-        animate();
-    script
-body
-html
+        <!-- تذكير بعيد الميلاد -->
+        <div class="
