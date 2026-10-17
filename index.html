@@ -47,87 +47,13 @@
             pointer-events: none;
         }
 
-        /* --- شاشة الباسورد --- */
-        #login-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(15, 0, 3, 0.95);
-            backdrop-filter: blur(15px);
-            z-index: 1000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: opacity 0.8s ease, visibility 0.8s;
-        }
-
-        .login-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 42, 95, 0.3);
-            padding: 40px 30px;
-            border-radius: 25px;
-            text-align: center;
-            box-shadow: 0 0 30px rgba(255, 42, 95, 0.2);
-            max-width: 400px;
-            width: 90%;
-        }
-
-        .login-card h2 {
-            color: var(--rose-gold);
-            margin-bottom: 20px;
-            font-size: 1.5rem;
-        }
-
-        .login-card input {
-            width: 100%;
-            padding: 12px 20px;
-            border-radius: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            background: rgba(0, 0, 0, 0.4);
-            color: #fff;
-            font-size: 1.1rem;
-            text-align: center;
-            outline: none;
-            margin-bottom: 20px;
-            letter-spacing: 3px;
-        }
-
-        .login-card button {
-            background: linear-gradient(135deg, #ff2a5f, #b30032);
-            border: none;
-            color: #fff;
-            padding: 12px 35px;
-            border-radius: 30px;
-            font-size: 1rem;
-            font-weight: 700;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(255, 42, 95, 0.4);
-            transition: transform 0.2s;
-        }
-
-        .login-card button:hover {
-            transform: scale(1.05);
-        }
-
-        .error-msg {
-            color: #ff4757;
-            font-size: 0.9rem;
-            margin-top: 10px;
-            display: none;
-        }
-
-        /* --- المحتوى الرئيسي --- */
+        /* --- المحتوى الرئيسي يظهر مباشرة --- */
         .main-container {
             position: relative;
             z-index: 2;
             max-width: 900px;
             margin: 0 auto;
             padding: 40px 20px;
-            display: none;
-            opacity: 0;
-            transition: opacity 1s ease;
         }
 
         .header-title {
@@ -290,19 +216,8 @@
 
     <canvas id="bg-canvas"></canvas>
 
-    <!-- 1. شاشة الباسورد -->
-    <div id="login-screen">
-        <div class="login-card">
-            <h2>حطي الباسورد</h2>
-            <input type="text" id="passwordInput" placeholder="اكتب 418" autocomplete="off">
-            <br>
-            <button onclick="checkPassword()">ارسال</button>
-            <div class="error-msg" id="errorMsg">كلمة السر غير صحيحة، حاولي مجدداً!</div>
-        </div>
-    </div>
-
-    <!-- 2. المحتوى الرئيسي للموقع -->
-    <div class="main-container" id="mainContent">
+    <!-- المحتوى الرئيسي للموقع يظهر مباشرة -->
+    <div class="main-container">
         
         <div class="header-title">
             <h1>كل سنة وأنتِ طيبة يا رنيم</h1>
@@ -367,41 +282,6 @@
     </div>
 
     <script>
-        function checkPassword() {
-            var inputVal = document.getElementById("passwordInput").value.trim();
-            var errorMsg = document.getElementById("errorMsg");
-            var loginScreen = document.getElementById("login-screen");
-            var mainContent = document.getElementById("mainContent");
-
-            // الباسورد الصحيح هو 418
-            if (inputVal === "418") {
-                loginScreen.style.opacity = "0";
-                setTimeout(function() {
-                    loginScreen.style.display = "none";
-                    mainContent.style.display = "block";
-                    setTimeout(function() {
-                        mainContent.style.opacity = "1";
-                    }, 50);
-                    if (typeof confetti === "function") {
-                        confetti({
-                            particleCount: 100,
-                            spread: 80,
-                            origin: { y: 0.6 }
-                        });
-                    }
-                }, 800);
-            } else {
-                errorMsg.style.display = "block";
-            }
-        }
-
-        // تفعيل زر Enter
-        document.getElementById("passwordInput").addEventListener("keyup", function(event) {
-            if (event.key === "Enter") {
-                checkPassword();
-            }
-        });
-
         function revealLove() {
             var loveMsg = document.getElementById("hiddenLove");
             loveMsg.classList.add("show");
@@ -453,4 +333,30 @@
                 this.x = Math.random() * width;
                 this.y = height + Math.random() * 50;
                 this.size = Math.random() * 15 + 8;
-                this.speed = Math.random()
+                this.speed = Math.random() * 1.2 + 0.5;
+                this.opacity = Math.random() * 0.4 + 0.1;
+            }
+            update() {
+                this.y -= this.speed;
+                if (this.y < -20) this.reset();
+            }
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.opacity;
+                ctx.fillStyle = "#ff2a5f";
+                ctx.font = `${this.size}px serif`;
+                ctx.fillText("♥", this.x, this.y);
+                ctx.restore();
+            }
+        }
+
+        const particles = Array.from({ length: 25 }, () => new HeartParticle());
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            particles.forEach(p => { p.update(); p.draw(); });
+            requestAnimationFrame(animate);
+        }
+        animate();
+    </script>
+</body>
+</html>
