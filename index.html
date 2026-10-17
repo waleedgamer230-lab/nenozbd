@@ -178,7 +178,7 @@
             margin-bottom: 25px;
         }
 
-        /* عبارة "نينو حبيبتي" القابلة للضغط */
+        /* جعل عبارة "نينو حبيبتي" تبدو وكأنها زر قابل للضغط بوضوح تام */
         .letter-trigger-header {
             font-size: 2.2rem;
             color: var(--rose-gold);
@@ -186,13 +186,16 @@
             font-family: 'Aref Ruqaa', serif;
             text-shadow: 0 0 15px rgba(255, 184, 198, 0.4);
             display: inline-block;
-            transition: transform 0.3s, color 0.3s;
+            transition: all 0.3s ease;
             margin-bottom: 20px;
+            border-bottom: 2px dashed rgba(255, 184, 198, 0.6);
+            padding-bottom: 5px;
         }
 
         .letter-trigger-header:hover {
-            transform: scale(1.08);
+            transform: scale(1.05);
             color: #fff;
+            border-bottom: 2px solid #fff;
         }
 
         .modern-letter-card {
@@ -218,7 +221,7 @@
             opacity: 1;
         }
 
-        /* --- السهم والتفاعل الإضافي --- */
+        /* --- زر "نسيت اقولك" المنسق ليظهر أنه قابل للضغط --- */
         .extra-section {
             text-align: center;
             margin-top: 40px;
@@ -226,21 +229,28 @@
         }
 
         .arrow-btn {
-            background: none;
-            border: none;
+            background: rgba(255, 42, 95, 0.15);
+            border: 1px solid rgba(255, 184, 198, 0.4);
             color: var(--rose-gold);
             font-size: 1.2rem;
             cursor: pointer;
             font-family: 'Cairo', sans-serif;
             display: inline-flex;
             align-items: center;
-            gap: 10px;
-            transition: transform 0.3s;
+            justify-content: center;
+            padding: 12px 30px;
+            border-radius: 30px;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
         }
 
         .arrow-btn:hover {
-            transform: translateY(3px);
+            transform: translateY(-3px);
+            background: rgba(255, 42, 95, 0.3);
             color: #fff;
+            box-shadow: 0 8px 25px rgba(255, 42, 95, 0.4);
+            border-color: #fff;
         }
 
         .hidden-love {
@@ -319,7 +329,7 @@
         <div class="letter-section">
             <h2 class="section-title">رومانسية وكدا</h2>
             
-            <!-- جملة نينو حبيبتي قابلة للضغط -->
+            <!-- جملة نينو حبيبتي قابلة للضغط ويوضح شكلها أنها زر -->
             <div class="letter-trigger-header" onclick="revealLetter()">
                 نينو حبيبتي
             </div>
@@ -327,3 +337,116 @@
             <div class="modern-letter-card" id="modernLetter">
                 <p>
                     كل سنه وانت طيبه وعارف ان الايام دي ممكن مكنش احسن حاجه بينا بس واثق انك هتظبطي الدنيا وانا معاكي يعني متخافيش مش بياع 
+                    كل سنه وانت طيبه يا رنيم ممكن نعرف بعض من زمان اوي ومكناش نتخيل اننا نبقى في الوضع دا وقعدتنا مع بعض والاجواء لما نتقابل كنا مستحيل نتخيلها 
+                    ويلا بقا معاكي الأسد يامحظوظه 😂 ربنا يخليكي ليا بقا ويارب تكون الهديه عجبتك وأكيد عجبتك عشان مني بس يعني برضو والسلسلة هذي أقيم هديه جبتها في حياتي لحد عموما فربنا يهديكي البسيها اطنط
+                    <br><br>
+                    نينو يعني الحب نينو يعني الجمال نينو يعني الرقي متخافيش في اي وقت لو حسيتي انك متدايقه اعرفي أن أنا أبوكي وحبيبك وجوزك وصاحبك وكل حاجه يعني مش هسيبك في يوم مكسوره 
+                    ربنا يخليكي ليا يا هبله ويا حظك معاكي وليد برضو بس يلا هتفضلي أصغر مني برضو يا 2010 وانا 2009 
+                    معايا يا رنيم هخليكي تعشقي الحياه انت بس نمشي بالمتفقين عليه كنت عايز الكلام دا يبقى معاكي لحد ماتوريه لعيالنا بس هنشوف هنشوف خير الكلام ما قل ودل بقا بحبك وكل سنه وانت معايا يا حبيبتي
+                </p>
+            </div>
+        </div>
+
+        <!-- السهم والكلمة السرية -->
+        <div class="extra-section">
+            <button class="arrow-btn" onclick="revealLove()">
+                نسيت اقولك
+            </button>
+            <div class="hidden-love" id="hiddenLove">
+                بحبك تاني
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function revealLetter() {
+            var letterCard = document.getElementById("modernLetter");
+            letterCard.classList.add("show");
+            if (typeof confetti === "function") {
+                confetti({
+                    particleCount: 70,
+                    spread: 80,
+                    origin: { y: 0.7 }
+                });
+            }
+        }
+
+        function revealLove() {
+            var loveMsg = document.getElementById("hiddenLove");
+            loveMsg.classList.add("show");
+            if (typeof confetti === "function") {
+                confetti({
+                    particleCount: 50,
+                    spread: 60,
+                    origin: { y: 0.8 }
+                });
+            }
+        }
+
+        // العداد الزمني يحسب منذ 18 أبريل 2026
+        const startDate = new Date("2026-04-18T00:00:00").getTime();
+
+        function updateCounter() {
+            const now = new Date().getTime();
+            const diff = now - startDate;
+
+            if (diff > 0) {
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+                document.getElementById("days").innerText = days;
+                document.getElementById("hours").innerText = hours;
+                document.getElementById("minutes").innerText = minutes;
+                document.getElementById("seconds").innerText = seconds;
+            }
+        }
+        setInterval(updateCounter, 1000);
+        updateCounter();
+
+        // خلفية القلوب المتحركة
+        const canvas = document.getElementById("bg-canvas");
+        const ctx = canvas.getContext("2d");
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+
+        window.addEventListener("resize", () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        });
+
+        class HeartParticle {
+            constructor() { this.reset(); }
+            reset() {
+                this.x = Math.random() * width;
+                this.y = height + Math.random() * 50;
+                this.size = Math.random() * 15 + 8;
+                this.speed = Math.random() * 1.2 + 0.5;
+                this.opacity = Math.random() * 0.4 + 0.1;
+            }
+            update() {
+                this.y -= this.speed;
+                this.y < -20 && this.reset();
+            }
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.opacity;
+                ctx.fillStyle = "#ff2a5f";
+                ctx.font = `${this.size}px serif`;
+                ctx.fillText("♥", this.x, this.y);
+                ctx.restore();
+            }
+        }
+
+        const particles = Array.from({ length: 25 }, () => new HeartParticle());
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            particles.forEach(p => { p.update(); p.draw(); });
+            requestAnimationFrame(animate);
+        }
+        animate();
+    </script>
+</body>
+</html>
