@@ -96,9 +96,16 @@
 
         .music-player-card h4 {
             color: var(--rose-gold);
+            margin-bottom: 8px;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .song-title-text {
+            color: #fff;
+            font-size: 0.95rem;
             margin-bottom: 12px;
-            font-size: 1.1rem;
-            font-weight: 600;
+            opacity: 0.9;
         }
 
         audio {
@@ -277,8 +284,8 @@
 
         <!-- مشغل الأغنية الأنيق -->
         <div class="music-player-card">
-            <h4>اغنيتنا المفضلة 🎵</h4>
-            <!-- استبدل song.mp3 برابط الأغنية المباشر أو اسم ملف الصوت الخاص بك -->
+            <h4>كل سنه وانت طيبه</h4>
+            <div class="song-title-text">معاااايااااا انت معاااااياااا</div>
             <audio controls>
                 <source src="song.mp3" type="audio/mpeg">
                 متصفحك لا يدعم تشغيل الصوت
@@ -314,122 +321,9 @@
             
             <!-- جملة نينو حبيبتي قابلة للضغط -->
             <div class="letter-trigger-header" onclick="revealLetter()">
-             نينو حبيبتي 
+                نينو حبيبتي
             </div>
 
             <div class="modern-letter-card" id="modernLetter">
                 <p>
                     كل سنه وانت طيبه وعارف ان الايام دي ممكن مكنش احسن حاجه بينا بس واثق انك هتظبطي الدنيا وانا معاكي يعني متخافيش مش بياع 
-                    كل سنه وانت طيبه يا رنيم ممكن نعرف بعض من زمان اوي ومكناش نتخيل اننا نبقى في الوضع دا وقعدتنا مع بعض والاجواء لما نتقابل كنا مستحيل نتخيلها 
-                    ويلا بقا معاكي الأسد يامحظوظه 😂 ربنا يخليكي لينا بقا ويارب تكون الهديه عجبتك وأكيد عجبتك عشان مني بس يعني برضو والسلسلة هذي أقيم هديه جبتها في حياتي لحد عموما فربنا يهديكي البسيها اطنط
-                    <br><br>
-                    نينو يعني الحب نينو يعني الجمال نينو يعني الرقي متخافيش في اي وقت لو حسيتي انك متدايقه اعرفي أن أنا أبوكي وحبيبك وجوزك وصاحبك وكل حاجه يعني مش هسيبك في يوم مكسوره 
-                    ربنا يخليكي ليا يا هبله ويا حظك معاكي وليد برضو بس يلا هتفضلي أصغر مني برضو يا 2010 وانا 2009 
-                    معايا يا رنيم هخليكي تعشقي الحياه انت بس نمشي بالمتفقين عليه كنت عايز الكلام دا يبقى معاكي لحد ماتوريه لعيالنا بس هنشوف هنشوف خير الكلام ما قل ودل بقا بحبك وكل سنه وانت معايا يا حبيبتي
-                </p>
-            </div>
-        </div>
-
-        <!-- السهم والكلمة السرية -->
-        <div class="extra-section">
-            <button class="arrow-btn" onclick="revealLove()">
-                نسيت اقولك
-            </button>
-            <div class="hidden-love" id="hiddenLove">
-                بحبك تاني
-            </div>
-        </div>
-
-    </div>
-
-    <script>
-        function revealLetter() {
-            var letterCard = document.getElementById("modernLetter");
-            letterCard.classList.add("show");
-            if (typeof confetti === "function") {
-                confetti({
-                    particleCount: 70,
-                    spread: 80,
-                    origin: { y: 0.7 }
-                });
-            }
-        }
-
-        function revealLove() {
-            var loveMsg = document.getElementById("hiddenLove");
-            loveMsg.classList.add("show");
-            if (typeof confetti === "function") {
-                confetti({
-                    particleCount: 50,
-                    spread: 60,
-                    origin: { y: 0.8 }
-                });
-            }
-        }
-
-        // العداد الزمني يحسب منذ 18 أبريل 2026
-        const startDate = new Date("2026-04-18T00:00:00").getTime();
-
-        function updateCounter() {
-            const now = new Date().getTime();
-            const diff = now - startDate;
-
-            if (diff > 0) {
-                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-                document.getElementById("days").innerText = days;
-                document.getElementById("hours").innerText = hours;
-                document.getElementById("minutes").innerText = minutes;
-                document.getElementById("seconds").innerText = seconds;
-            }
-        }
-        setInterval(updateCounter, 1000);
-        updateCounter();
-
-        // خلفية القلوب المتحركة
-        const canvas = document.getElementById("bg-canvas");
-        const ctx = canvas.getContext("2d");
-        let width = canvas.width = window.innerWidth;
-        let height = canvas.height = window.innerHeight;
-
-        window.addEventListener("resize", () => {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
-        });
-
-        class HeartParticle {
-            constructor() { this.reset(); }
-            reset() {
-                this.x = Math.random() * width;
-                this.y = height + Math.random() * 50;
-                this.size = Math.random() * 15 + 8;
-                this.speed = Math.random() * 1.2 + 0.5;
-                this.opacity = Math.random() * 0.4 + 0.1;
-            }
-            update() {
-                this.y -= this.speed;
-                this.y < -20 && this.reset();
-            }
-            draw() {
-                ctx.save();
-                ctx.globalAlpha = this.opacity;
-                ctx.fillStyle = "#ff2a5f";
-                ctx.font = `${this.size}px serif`;
-                ctx.fillText("♥", this.x, this.y);
-                ctx.restore();
-            }
-        }
-
-        const particles = Array.from({ length: 25 }, () => new HeartParticle());
-        function animate() {
-            ctx.clearRect(0, 0, width, height);
-            particles.forEach(p => { p.update(); p.draw(); });
-            requestAnimationFrame(animate);
-        }
-        animate();
-    </script>
-</body>
-</html>
